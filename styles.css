@@ -55,7 +55,7 @@ body{
 .number{
     background-color:teal
 }
-.zero{
+#zero{
     flex: 2.05 1 0;
     background-color: teal;
 }

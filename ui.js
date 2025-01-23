@@ -35,11 +35,15 @@ function getOperator(operator){
 num_btns.forEach((btn)=>{
     btn.addEventListener("click", (event)=>{
         const number = event.target.textContent;
-        if (displayed_number == null){
-            displayed_number = number
-        } else{
-            displayed_number += number
+        if (displayed_number === null) {
+            if (number === "0") return; // Early return for the specific edge case
+            displayed_number = number; // Initialize displayed_number if it's not "0"
+        } else {
+            displayed_number += number; // Append number if displayed_number is not null
         }
+
+        display.textContent = displayed_number;
+
         display.textContent = displayed_number
         if (operator != null){
             b = displayed_number
