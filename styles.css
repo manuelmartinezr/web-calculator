@@ -17,7 +17,13 @@ body{
 .display{
     background: rgb(182, 187, 184);
     flex: 1 1 0;
-    margin:5px
+    margin: 6px 6px 8px 6px; /* Top, Right, Bottom, Left */
+    color:black;
+    font: 60px 'Comic Sans MS', 'Comic Sans', cursive;
+    display: flex;
+    justify-content: right;
+    padding-right: 10px;
+    align-items: center;
 }
 .keypad{
     flex: 4 1 0;
