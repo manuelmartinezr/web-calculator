@@ -72,4 +72,5 @@ clear_btn.addEventListener("click", ()=>{
     a = null;
     b = null;
     operator = null;
+    displayed_number = null;
 })
