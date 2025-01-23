@@ -65,3 +65,11 @@ basic_op_btns.forEach((btn)=>{
         }
     });
 });
+
+const clear_btn = document.getElementById('clear-btn')
+clear_btn.addEventListener("click", ()=>{
+    display.textContent = 0;
+    a = null;
+    b = null;
+    operator = null;
+})
