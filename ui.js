@@ -15,7 +15,6 @@ function operate(operator, a, b){
 const display = document.querySelector('.display')
 const basic_op_btns = document.querySelectorAll('.basic-operation')
 const num_btns = document.querySelectorAll('.number')
-// como lidiar con el 0? es necesario cambiarlo a number o no hace nada?
 
 let a = null;
 let b = null;
@@ -50,16 +49,11 @@ num_btns.forEach((btn)=>{
         }
     });
 });
-
-// function does change value of variable outside its scope
-// have to click function button twice to op with result, 
-// fixed: remove setting operator to null after getting result
-
 basic_op_btns.forEach((btn)=>{
     btn.addEventListener("click", (event)=>{
         if (event.target.textContent != "="){
             operator = getOperator(event.target.textContent)
-        } // block scoped?
+        }
         displayed_number = "0"
         if (b != null){
             let result = operate(operator, Number(a), Number(b))
@@ -69,9 +63,6 @@ basic_op_btns.forEach((btn)=>{
             } else{
                 a = result
             }
-            console.log(operator)
-            console.log(b)
-            console.log(result)
             display.textContent = result
             b = null
         }
@@ -85,4 +76,31 @@ clear_btn.addEventListener("click", ()=>{
     b = null;
     operator = null;
     displayed_number = "0";
+})
+
+const mod_btn = document.getElementById('mod-btn')
+mod_btn.addEventListener("click", ()=>{
+    let result = operate('div', Number(displayed_number), 100)
+    if (b == null){
+        a = result
+    } else{
+        b = result
+    }
+    displayed_number = String(result)
+    display.textContent = displayed_number
+})
+
+const plus_minus_btn = document.getElementById('plus-minus-btn')
+plus_minus_btn.addEventListener("click", ()=>{
+    if (displayed_number.includes("-")){
+        displayed_number = displayed_number.slice(1);
+    } else{
+        displayed_number = "-" + displayed_number
+    }
+    if (b == null){
+        a = displayed_number
+    } else{
+        b = displayed_number
+    }
+    display.textContent = displayed_number
 })
