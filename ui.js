@@ -35,16 +35,14 @@ function getOperator(operator){
 num_btns.forEach((btn)=>{
     btn.addEventListener("click", (event)=>{
         const number = event.target.textContent;
-        if (displayed_number === null) {
-            if (number === "0") return; // Early return for the specific edge case
-            displayed_number = number; // Initialize displayed_number if it's not "0"
+        if(displayed_number === "0" && number != "."){
+            displayed_number = number
+        } else if (displayed_number.includes(".") && number === "."){
+            return
         } else {
-            displayed_number += number; // Append number if displayed_number is not null
+            displayed_number += number;
         }
-
         display.textContent = displayed_number;
-
-        display.textContent = displayed_number
         if (operator != null){
             b = displayed_number
         } else{
@@ -59,12 +57,22 @@ num_btns.forEach((btn)=>{
 
 basic_op_btns.forEach((btn)=>{
     btn.addEventListener("click", (event)=>{
-        operator = getOperator(event.target.textContent) // block scoped?
-        displayed_number = null
+        if (event.target.textContent != "="){
+            operator = getOperator(event.target.textContent)
+        } // block scoped?
+        displayed_number = "0"
         if (b != null){
-            const result = operate(operator, Number(a), Number(b))
+            let result = operate(operator, Number(a), Number(b))
+            if (b === "0" && operator === "div"){
+                result = "naurr"
+                a = null
+            } else{
+                a = result
+            }
+            console.log(operator)
+            console.log(b)
+            console.log(result)
             display.textContent = result
-            a = result
             b = null
         }
     });
@@ -72,9 +80,9 @@ basic_op_btns.forEach((btn)=>{
 
 const clear_btn = document.getElementById('clear-btn')
 clear_btn.addEventListener("click", ()=>{
-    display.textContent = 0;
+    display.textContent = "0";
     a = null;
     b = null;
     operator = null;
-    displayed_number = null;
+    displayed_number = "0";
 })
