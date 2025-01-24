@@ -60,10 +60,12 @@ basic_op_btns.forEach((btn)=>{
             if (b === "0" && operator === "div"){
                 result = "naurr"
                 a = null
+                displayed_number = result
             } else{
                 a = result
+                displayed_number = String(Math.round(result * 100)/100);
             }
-            display.textContent = result
+            display.textContent = displayed_number
             b = null
         }
     });
@@ -86,7 +88,7 @@ mod_btn.addEventListener("click", ()=>{
     } else{
         b = result
     }
-    displayed_number = String(result)
+    displayed_number = String(Math.round(result * 100)/100)
     display.textContent = displayed_number
 })
 
