@@ -8,8 +8,8 @@ body{
 .calculator {
     height: 500px; 
     width: 400px;
-    background: black;
-    border: 10px solid rgb(54, 54, 54);
+    background: purple;
+    border: 10px solid hotpink;
     border-radius: 8px;
     display: flex;
     flex-direction: column
@@ -47,15 +47,25 @@ body{
     border-radius: 3px;
 }
 .basic-operation{
-    background-color:orange
+    background-color: salmon
+}
+.basic-operation:active{
+    background-color: rgb(246, 115, 101)
 }
 .special-operation{
-    background-color:rgb(0, 170, 255)
+    background-color:pink
 }
+.special-operation:active{
+    background-color: rgb(253, 171, 185)
+}
+
 .number{
-    background-color:teal
+    background-color:white;
+    color:firebrick
+}
+.number:active{
+    background-color: lightgrey;
 }
 #zero{
     flex: 2.05 1 0;
-    background-color: teal;
 }

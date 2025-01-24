@@ -19,7 +19,7 @@ const num_btns = document.querySelectorAll('.number')
 let a = null;
 let b = null;
 let operator = null;
-let displayed_number = null;
+let displayed_number = "0";
 
 function getOperator(operator){
     const operations = {
