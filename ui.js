@@ -19,6 +19,7 @@ const num_btns = document.querySelectorAll('.number')
 let a = null;
 let b = null;
 let operator = null;
+let prev_operator = null;
 let displayed_number = "0";
 
 function getOperator(operator){
@@ -34,30 +35,39 @@ function getOperator(operator){
 num_btns.forEach((btn)=>{
     btn.addEventListener("click", (event)=>{
         const number = event.target.textContent;
-        if(displayed_number === "0" && number != "."){
-            displayed_number = number
-        } else if (displayed_number.includes(".") && number === "."){
-            return
+        if (number === "."){
+            if (!displayed_number.includes(".")){
+                displayed_number += number;
+            } else {
+                return;
+            }
+        } else if (displayed_number === "0" || (prev_operator != null && b == null)){
+            displayed_number = number;
         } else {
             displayed_number += number;
         }
+        console.log(`displayed_number: ${displayed_number}`);
         display.textContent = displayed_number;
-        if (operator != null){
+        if (prev_operator != null){
             b = displayed_number
         } else{
             a = displayed_number
         }
+        console.log(`a: ${a}, b: ${b}, operator: ${operator}`);
     });
 });
 basic_op_btns.forEach((btn)=>{
     btn.addEventListener("click", (event)=>{
         if (event.target.textContent != "="){
-            operator = getOperator(event.target.textContent)
+            if (b != null){
+                operator = getOperator(event.target.textContent)
+            } else {
+                prev_operator = getOperator(event.target.textContent)
+            }
         }
-        displayed_number = "0"
         if (b != null){
-            let result = operate(operator, Number(a), Number(b))
-            if (b === "0" && operator === "div"){
+            let result = operate(prev_operator, Number(a), Number(b))
+            if (b === "0" && prev_operator === "div"){
                 result = "naurr"
                 a = null
                 displayed_number = result
@@ -65,6 +75,7 @@ basic_op_btns.forEach((btn)=>{
                 a = result
                 displayed_number = String(Math.round(result * 100)/100);
             }
+            prev_operator = operator
             display.textContent = displayed_number
             b = null
         }
@@ -77,6 +88,7 @@ clear_btn.addEventListener("click", ()=>{
     a = null;
     b = null;
     operator = null;
+    prev_operator = null;
     displayed_number = "0";
 })
 
