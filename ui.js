@@ -106,7 +106,10 @@ mod_btn.addEventListener("click", ()=>{
 
 const plus_minus_btn = document.getElementById('plus-minus-btn')
 plus_minus_btn.addEventListener("click", ()=>{
-    if (displayed_number.includes("-")){
+    if (displayed_number === "0"){
+        return
+    }
+    else if (displayed_number.includes("-")){
         displayed_number = displayed_number.slice(1);
     } else{
         displayed_number = "-" + displayed_number
